@@ -19,6 +19,41 @@
       <input type="checkbox">
       </div>
     </div>
+    <div class="rule">
+      <div>Springs Stage 1 (OEM style: Up to 30% rate increase and/or lowered 25mm or less) </div>
+      <div>7</div>
+      <div><input type="checkbox"></div>
+    </div>
+    <div class="rule">
+      <div>Springs Stage 2 (Any spring combination beyond Stage 1) </div>
+      <div>13</div>
+      <div><input type="checkbox"></div>
+    </div>
+    <div class="rule">
+      <div>Seam weld</div>
+      <div>10</div>
+      <div><input type="checkbox"></div>
+    </div>
+    <div class="rule">
+      <div>Change Suspension Type and/or alternate mounting points.</div>
+      <div>10</div>
+      <div><input type="checkbox"></div>
+    </div>
+    <div class="rule">
+      <div>Roll cage / Chassis Bracing (6 or mor attachment points)</div>
+      <div>5</div>
+      <div><input type="checkbox"></div>
+    </div>
+    <div class="rule">
+      <div>Sway bars (1 bar, no points for modification to the bar and links)</div>
+      <div>2</div>
+      <div><input type="checkbox"></div>
+    </div>
+    <div class="rule">
+      <div>Sway bars (both, no points for modification to the bar and links)</div>
+      <div>6</div>
+      <div><input type="checkbox"></div>
+    </div>
   </div> 
 
   
