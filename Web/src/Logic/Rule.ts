@@ -1,5 +1,5 @@
-type Rule = {
-    id: number; 
+export interface Rule {
     refNumer: string; 
     description: string;
+    points: number;
 }
