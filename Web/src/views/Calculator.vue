@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { reactive, ref } from 'vue';
+import { reactive, ref, computed } from 'vue';
 import { Rule } from '../Logic/Rule'
 
   const selectedRules = ref([]);
@@ -15,6 +15,15 @@ import { Rule } from '../Logic/Rule'
     description: "Springs Stage 1 (OEM style: Up to 30% rate increase and/or lowered 25mm or less)",
     points: 7,
   }
+
+
+  var allRules = [r6_2_1, r6_2_2]
+
+  const pointsToAdd = computed(()=> {
+      var points = selectedRules.value.map(r => allRules.find(el => el.refNumer === r).points); 
+      var totalPoints = points.reduce((acc, curr) => acc + curr, 0);
+      return totalPoints;
+    });
 </script >
 
 <template>
@@ -25,6 +34,9 @@ import { Rule } from '../Logic/Rule'
 
     <div>
       selected rules: {{ selectedRules }}
+    </div>
+    <div>
+      points: {{ pointsToAdd }}
     </div>
 
     <div class="container">
