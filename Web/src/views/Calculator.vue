@@ -1,30 +1,31 @@
 <script setup lang="ts">
+import { reactive, ref, computed } from 'vue'
+import type { Rule } from '../Logic/Rule'
 
-import { reactive, ref, computed } from 'vue';
-import { Rule } from '../Logic/Rule'
+const selectedRules = ref([])
 
-  const selectedRules = ref([]);
+const r6_2_1: Rule = {
+  refNumer: '6.2.1',
+  description: 'Height Adjustabled Coil-overs',
+  points: 25,
+}
+const r6_2_2: Rule = {
+  refNumer: '6.2.2',
+  description: 'Springs Stage 1 (OEM style: Up to 30% rate increase and/or lowered 25mm or less)',
+  points: 7,
+}
 
-  var r6_2_1: Rule = {
-    refNumer: "6.2.1",
-    description: "Height Adjustabled Coil-overs",
-    points: 25,
-  }
-  var r6_2_2: Rule = {
-    refNumer: "6.2.2",
-    description: "Springs Stage 1 (OEM style: Up to 30% rate increase and/or lowered 25mm or less)",
-    points: 7,
-  }
+const allRules = [r6_2_1, r6_2_2]
 
-
-  var allRules = [r6_2_1, r6_2_2]
-
-  const pointsToAdd = computed(()=> {
-      var points = selectedRules.value.map(r => allRules.find(el => el.refNumer === r).points); 
-      var totalPoints = points.reduce((acc, curr) => acc + curr, 0);
-      return totalPoints;
-    });
-</script >
+const pointsToAdd = computed(() => {
+  const points = selectedRules.value.map((r) => {
+    const rule = allRules.find((el) => el.refNumer === r)
+    return rule ? rule.points : 0
+  })
+  const totalPoints = points.reduce((acc, curr) => acc + curr, 0)
+  return totalPoints
+})
+</script>
 
 <template>
   <div>
@@ -32,25 +33,21 @@ import { Rule } from '../Logic/Rule'
       <h1>NASA Autocross Class Calculator</h1>
     </div>
 
-    <div>
-      selected rules: {{ selectedRules }}
-    </div>
-    <div>
-      points: {{ pointsToAdd }}
-    </div>
+    <div>selected rules: {{ selectedRules }}</div>
+    <div>points: {{ pointsToAdd }}</div>
 
     <div class="container">
       <div class="header">Chassis and Suspension</div>
       <div class="rule">
-        <div>{{r6_2_1.description}}</div>
-        <div>{{r6_2_1.points}}</div>
+        <div>{{ r6_2_1.description }}</div>
+        <div>{{ r6_2_1.points }}</div>
         <div>
-          <input type="checkbox" :value="r6_2_1.refNumer" v-model="selectedRules"/>
+          <input type="checkbox" :value="r6_2_1.refNumer" v-model="selectedRules" />
         </div>
       </div>
       <div class="rule">
-        <div>{{r6_2_2.description}}</div>
-        <div>{{r6_2_2.points}}</div>
+        <div>{{ r6_2_2.description }}</div>
+        <div>{{ r6_2_2.points }}</div>
         <div><input type="checkbox" :value="r6_2_2.refNumer" v-model="selectedRules" /></div>
       </div>
       <div class="rule">
