@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref, computed } from 'vue'
+import RuleInput from '../components/RuleInput.vue'
 import type { Rule } from '../Logic/Rule'
 
 const selectedRules = ref([])
@@ -14,8 +15,13 @@ const r6_2_2: Rule = {
   description: 'Springs Stage 1 (OEM style: Up to 30% rate increase and/or lowered 25mm or less)',
   points: 7,
 }
+const r6_2_3: Rule = {
+  refNumer: '6.2.3',
+  description: 'Seam Weld',
+  points: 10
+}
 
-const allRules = [r6_2_1, r6_2_2]
+const allRules = [r6_2_1, r6_2_2, r6_2_3]
 
 const pointsToAdd = computed(() => {
   const points = selectedRules.value.map((r) => {
@@ -38,28 +44,9 @@ const pointsToAdd = computed(() => {
 
     <div class="container">
       <div class="header">Chassis and Suspension</div>
-      <div class="rule">
-        <div>{{ r6_2_1.description }}</div>
-        <div>{{ r6_2_1.points }}</div>
-        <div>
-          <input type="checkbox" :value="r6_2_1.refNumer" v-model="selectedRules" />
-        </div>
-      </div>
-      <div class="rule">
-        <div>{{ r6_2_2.description }}</div>
-        <div>{{ r6_2_2.points }}</div>
-        <div><input type="checkbox" :value="r6_2_2.refNumer" v-model="selectedRules" /></div>
-      </div>
-      <div class="rule">
-        <div>Springs Stage 2 (Any spring combination beyond Stage 1)</div>
-        <div>13</div>
-        <div><input type="checkbox" /></div>
-      </div>
-      <div class="rule">
-        <div>Seam weld</div>
-        <div>10</div>
-        <div><input type="checkbox" /></div>
-      </div>
+      <rule-input v-model="selectedRules" :rule="r6_2_1"></rule-input>
+      <rule-input v-model="selectedRules" :rule="r6_2_2"></rule-input>
+      <rule-input v-model="selectedRules" :rule="r6_2_3"></rule-input>
       <div class="rule">
         <div>Change Suspension Type and/or alternate mounting points.</div>
         <div>10</div>
