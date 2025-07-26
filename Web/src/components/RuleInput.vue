@@ -8,10 +8,10 @@ const props = defineProps<{rule: Rule}>()
 
 <template>
      <div class="rule">
-        <div>{{ props.rule.description }}</div>
-        <div>{{ props.rule.points }}</div>
-        <div>
+       <div>
           <input type="checkbox" :value="props.rule.refNumer" v-model="model" />
         </div>
+        <div>{{ props.rule.points }}</div>
+        <div>{{ props.rule.description }}</div>
       </div>
 </template>
