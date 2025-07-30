@@ -1,5 +1,5 @@
 export interface Rule {
-    refNumer: string; 
+    refNumber: string; 
     description: string;
     points: number;
 }
