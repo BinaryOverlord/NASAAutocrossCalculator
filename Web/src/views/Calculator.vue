@@ -6,7 +6,7 @@ import type { Rule } from '../Logic/Rule'
 const selectedRules = ref([])
 
 const suspensionRules = {
-  r6_2_1:  {
+  r6_2_1: {
     refNumer: '6.2.1',
     description: 'Height Adjustabled Coil-overs',
     points: 25,
@@ -68,15 +68,9 @@ const suspensionRules = {
   }
 };
 
-const allRules : Array<any> = []
+const allRules: Array<any> = []
 
-for(const [_, value] of Object.entries(suspensionRules)) {
-  if (typeof value === 'string') {
-  } else {
-    allRules.push(value)
-  }
-}
-
+addRules(suspensionRules);
 
 const pointsToAdd = computed(() => {
   const points = selectedRules.value.map((r) => {
@@ -86,6 +80,16 @@ const pointsToAdd = computed(() => {
   const totalPoints = points.reduce((acc, curr) => acc + curr, 0)
   return totalPoints
 })
+
+
+function addRules(rulesContainer: any) {
+  for (const [_, value] of Object.entries(rulesContainer)) {
+    if (typeof value === 'string') {
+    } else {
+      allRules.push(value);
+    }
+  }
+}
 </script>
 
 <template>
@@ -98,7 +102,7 @@ const pointsToAdd = computed(() => {
     <div>points: {{ pointsToAdd }}</div>
 
     <div class="container">
-      <div class="header">Chassis and Suspension</div>
+      <h2 class="header">Chassis and Suspension</h2>
       <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_1"></rule-input>
       <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_2"></rule-input>
       <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_3"></rule-input>
@@ -124,9 +128,13 @@ const pointsToAdd = computed(() => {
   }
 }
 
+.container {
+  padding-top: 20px;
+}
+
 .rule {
   display: grid;
-  grid-template-columns:  20px 30px auto;
+  grid-template-columns: 20px 30px auto;
 }
 
 .header {
