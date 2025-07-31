@@ -4,6 +4,30 @@ import RuleInput from '../components/RuleInput.vue'
 import type { Rule } from '../Logic/Rule'
 
 const selectedRules = ref([])
+const baseClass = ref('');
+const basePoints = ref('');
+const index = ref('');
+
+const pointsToAdd = computed(() => {
+  const points = selectedRules.value.map((r) => {
+    const rule = allRules.find((el) => el.refNumber === r)
+    return rule ? rule.points : 0
+  })
+  return points.reduce((acc, curr) => acc + curr, 0)
+})
+const totalPoints = computed(() => {
+  var baseClassPoints = Number(baseClass.value);
+  var basePointsPoints = Number(basePoints.value);
+  var pointsToAddPoints = Number(pointsToAdd.value);
+  var indexPoints = Number(index.value) > 0 ? Number(index.value) : 1.0;
+
+  return baseClassPoints + basePointsPoints + (pointsToAddPoints * indexPoints);
+});
+
+
+const isNumeric = (val: string) : boolean => {
+   return !isNaN(Number(val));
+}
 
 const suspensionRules = {
   r6_2_1: {
@@ -350,14 +374,7 @@ addRules(forcedInductionRules);
 addRules(naRules);
 addRules(wheelTireRules);
 
-const pointsToAdd = computed(() => {
-  const points = selectedRules.value.map((r) => {
-    const rule = allRules.find((el) => el.refNumber === r)
-    return rule ? rule.points : 0
-  })
-  const totalPoints = points.reduce((acc, curr) => acc + curr, 0)
-  return totalPoints
-})
+
 
 
 function addRules(rulesContainer: any) {
@@ -376,113 +393,149 @@ function addRules(rulesContainer: any) {
       <h1>NASA Autocross Class Calculator</h1>
     </div>
 
-    <div class="pointsOverlay">
+    <div class="pointsOverlay pointsOverlay--bottom">
       <div>selected rules: {{ selectedRules }}</div>
+      <div>Base Class: {{ baseClass }}</div>
+      <div>Base Points: {{ basePoints }}</div>
+      <div>index: {{ index }}</div>
       <div>points: {{ pointsToAdd }}</div>
+      <div>Total Points: {{ totalPoints }}</div>
     </div>
 
-    <div class="container">
-      <h2 class="header">Chassis and Suspension</h2>
-      <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_1"></rule-input>
-      <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_2"></rule-input>
-      <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_3"></rule-input>
-      <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_4"></rule-input>
-      <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_5"></rule-input>
-      <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_6"></rule-input>
-      <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_7"></rule-input>
-      <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_8"></rule-input>
-      <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_9"></rule-input>
-      <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_10"></rule-input>
-      <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_11"></rule-input>
-      <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_12"></rule-input>
+    <div class="CarInformation">
+      <select v-model="baseClass">
+        <option value="">Select Base Class</option>
+        <option value="0">G</option>
+        <option value="20">F</option>
+        <option value="40">E</option>
+        <option value="60">D</option>
+        <option value="80">C</option>
+        <option value="100">B</option>
+        <option value="120">A</option>
+        <option value="150">R</option>
+        <option value="190">X</option>
+        <option value="250">O</option>
+      </select>
+      <select v-model="basePoints">
+        <option value="">Select Base Points</option>
+        <option value="0">none</option>
+        <option value="5">*</option>
+        <option value="10">**</option>
+        <option value="15">***</option>
+      </select>
+      <select v-model="index">
+        <option value="">Select Tier</option>
+        <option value="0.87">T1</option>
+        <option value="0.92">T2</option>
+        <option value="1">T3</option>
+      </select>
     </div>
 
-    <div class="container">
-      <h2 class="header">Body and Weight Reduction</h2>
-      <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_1"></rule-input>
-      <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_2"></rule-input>
-      <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_3"></rule-input>
-      <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_4"></rule-input>
-      <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_5"></rule-input>
-      <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_6"></rule-input>
-      <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_7"></rule-input>
-      <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_8"></rule-input>
-      <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_9"></rule-input>
-      <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_10"></rule-input>
-      <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_11"></rule-input>
-      <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_12"></rule-input>
-      <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_13"></rule-input>
-      <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_14"></rule-input>
-      <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_15"></rule-input>
-    </div>
+    <div class="rulesSections">
 
-    <div class="container">
-      <h2 class="header">Aero (other than OEM add-ons)</h2>
-      <div>
-        Aero mods include installation of aftermarket devices to improve performance by
-        improving aerodynamics and/or increasing downforce:
-        <ul>
-          <li>Wings: front or rear with area greater than 240 sq in </li>
-          <li>Splitters: extend 4 inch or more beyond frontal bumper of the vehicle</li>
-        </ul>
+      <div class="container">
+        <h2 class="header">Chassis and Suspension</h2>
+        <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_1"></rule-input>
+        <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_2"></rule-input>
+        <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_3"></rule-input>
+        <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_4"></rule-input>
+        <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_5"></rule-input>
+        <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_6"></rule-input>
+        <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_7"></rule-input>
+        <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_8"></rule-input>
+        <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_9"></rule-input>
+        <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_10"></rule-input>
+        <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_11"></rule-input>
+        <rule-input v-model="selectedRules" :rule="suspensionRules.r6_2_12"></rule-input>
       </div>
-      <rule-input v-model="selectedRules" :rule="aeroRules.r6_4_1"></rule-input>
-      <rule-input v-model="selectedRules" :rule="aeroRules.r6_4_2"></rule-input>
-    </div>
 
-    <div class="container">
-      <h2 class="header">Drivetrain and Engine Modifications</h2>
-      <div>
-        Adding a Turbo or Supercharder requires you to apply for a new BASE CLASS.
+      <div class="container">
+        <h2 class="header">Body and Weight Reduction</h2>
+        <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_1"></rule-input>
+        <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_2"></rule-input>
+        <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_3"></rule-input>
+        <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_4"></rule-input>
+        <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_5"></rule-input>
+        <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_6"></rule-input>
+        <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_7"></rule-input>
+        <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_8"></rule-input>
+        <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_9"></rule-input>
+        <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_10"></rule-input>
+        <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_11"></rule-input>
+        <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_12"></rule-input>
+        <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_13"></rule-input>
+        <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_14"></rule-input>
+        <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_15"></rule-input>
       </div>
-      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_2"></rule-input>
-      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_3"></rule-input>
-      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_4"></rule-input>
-      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_5"></rule-input>
-      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_6"></rule-input>
-      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_7"></rule-input>
-      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_8"></rule-input>
-      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_9"></rule-input>
-      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_10"></rule-input>
-      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_11"></rule-input>
-      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_12"></rule-input>
-      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_13"></rule-input>
-    </div>
 
-    <div class="container">
-      <h2 class="header">Supercharged and or Turbo Vehicles</h2>
-      <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_1"></rule-input>
-      <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_2"></rule-input>
-      <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_3"></rule-input>
-      <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_4"></rule-input>
-      <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_5"></rule-input>
-      <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_6"></rule-input>
-      <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_7"></rule-input>
-      <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_8"></rule-input>
-    </div>
+      <div class="container">
+        <h2 class="header">Aero (other than OEM add-ons)</h2>
+        <div>
+          Aero mods include installation of aftermarket devices to improve performance by
+          improving aerodynamics and/or increasing downforce:
+          <ul>
+            <li>Wings: front or rear with area greater than 240 sq in </li>
+            <li>Splitters: extend 4 inch or more beyond frontal bumper of the vehicle</li>
+          </ul>
+        </div>
+        <rule-input v-model="selectedRules" :rule="aeroRules.r6_4_1"></rule-input>
+        <rule-input v-model="selectedRules" :rule="aeroRules.r6_4_2"></rule-input>
+      </div>
 
-    <div class="container">
-      <h2 class="header">Naturally Aspirated Vehicles</h2>
-      <rule-input v-model="selectedRules" :rule="naRules.r6_7_1"></rule-input>
-      <rule-input v-model="selectedRules" :rule="naRules.r6_7_2"></rule-input>
-      <rule-input v-model="selectedRules" :rule="naRules.r6_7_3"></rule-input>
-      <rule-input v-model="selectedRules" :rule="naRules.r6_7_4"></rule-input>
-      <rule-input v-model="selectedRules" :rule="naRules.r6_7_5"></rule-input>
-      <rule-input v-model="selectedRules" :rule="naRules.r6_7_6"></rule-input>
-      <rule-input v-model="selectedRules" :rule="naRules.r6_7_7"></rule-input>
-      <rule-input v-model="selectedRules" :rule="naRules.r6_7_8"></rule-input>
-      <rule-input v-model="selectedRules" :rule="naRules.r6_7_9"></rule-input>
-    </div>
+      <div class="container">
+        <h2 class="header">Drivetrain and Engine Modifications</h2>
+        <div>
+          Adding a Turbo or Supercharder requires you to apply for a new BASE CLASS.
+        </div>
+        <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_2"></rule-input>
+        <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_3"></rule-input>
+        <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_4"></rule-input>
+        <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_5"></rule-input>
+        <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_6"></rule-input>
+        <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_7"></rule-input>
+        <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_8"></rule-input>
+        <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_9"></rule-input>
+        <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_10"></rule-input>
+        <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_11"></rule-input>
+        <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_12"></rule-input>
+        <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_13"></rule-input>
+      </div>
 
-    <div class="container">
-      <h2 class="header">Wheels and Tires</h2>
-      <div>Tire Warmers are prohibited.</div>
-      <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_1"></rule-input>
-      <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_2"></rule-input>
-      <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_3"></rule-input>
-      <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_4"></rule-input>
-      <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_5"></rule-input>
-      <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_6"></rule-input>
+      <div class="container">
+        <h2 class="header">Supercharged and or Turbo Vehicles</h2>
+        <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_1"></rule-input>
+        <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_2"></rule-input>
+        <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_3"></rule-input>
+        <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_4"></rule-input>
+        <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_5"></rule-input>
+        <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_6"></rule-input>
+        <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_7"></rule-input>
+        <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_8"></rule-input>
+      </div>
+
+      <div class="container">
+        <h2 class="header">Naturally Aspirated Vehicles</h2>
+        <rule-input v-model="selectedRules" :rule="naRules.r6_7_1"></rule-input>
+        <rule-input v-model="selectedRules" :rule="naRules.r6_7_2"></rule-input>
+        <rule-input v-model="selectedRules" :rule="naRules.r6_7_3"></rule-input>
+        <rule-input v-model="selectedRules" :rule="naRules.r6_7_4"></rule-input>
+        <rule-input v-model="selectedRules" :rule="naRules.r6_7_5"></rule-input>
+        <rule-input v-model="selectedRules" :rule="naRules.r6_7_6"></rule-input>
+        <rule-input v-model="selectedRules" :rule="naRules.r6_7_7"></rule-input>
+        <rule-input v-model="selectedRules" :rule="naRules.r6_7_8"></rule-input>
+        <rule-input v-model="selectedRules" :rule="naRules.r6_7_9"></rule-input>
+      </div>
+
+      <div class="container">
+        <h2 class="header">Wheels and Tires</h2>
+        <div>Tire Warmers are prohibited.</div>
+        <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_1"></rule-input>
+        <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_2"></rule-input>
+        <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_3"></rule-input>
+        <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_4"></rule-input>
+        <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_5"></rule-input>
+        <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_6"></rule-input>
+      </div>
     </div>
 
   </div>
@@ -491,12 +544,9 @@ function addRules(rulesContainer: any) {
 </template>
 
 <style>
-@media (min-width: 1024px) {
-  .heading {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+
+.rulesSections {
+  padding-bottom: 50px;
 }
 
 .container {
@@ -511,5 +561,21 @@ function addRules(rulesContainer: any) {
 .header {
   grid-row: 1;
   grid-column: 1 / span 3;
+}
+
+.pointsOverlay--bottom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  color: black;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  padding: 12px 24px;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  font-size: 1.2rem;
 }
 </style>
