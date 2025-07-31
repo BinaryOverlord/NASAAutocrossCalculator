@@ -443,9 +443,9 @@ function addRules(rulesContainer: any) {
       </select>
       <select v-model="index">
         <option value="">Select Tier</option>
-        <option value="0.87">T1</option>
-        <option value="0.92">T2</option>
-        <option value="1">T3</option>
+        <option value="0.87">T1 0.87</option>
+        <option value="0.92">T2 0.92</option>
+        <option value="1">T3 1.00</option>
       </select>
     </div>
 
