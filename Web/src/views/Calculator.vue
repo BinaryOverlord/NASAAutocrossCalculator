@@ -156,12 +156,199 @@ const aeroRules = {
     points: 5
   }
 }
+const drivetrainRules = {
+  r6_5_2: {
+    refNumber: '6.5.2',
+    description: 'Change of drivetrain configuration ( FWD to AWD, RWD to AWD, AWD to RWD, etc.)',
+    points: 15,
+  },
+  r6_5_3: {
+    refNumber: '6.5.3',
+    description: 'Transmission swap (if gear ratios of 1, 2 differ and/or weight reduced by 20 or more lbs)',
+    points: 5,
+  },
+  r6_5_4: {
+    refNumber: '6.5.4',
+    description: 'Change final drive ratio',
+    points: 3,
+  },
+  r6_5_5: {
+    refNumber: '6.5.5',
+    description: 'Differential upgrade LSD ',
+    points: 5,
+  },
+  r6_5_6: {
+    refNumber: '6.5.6',
+    description: 'Engine bore or stroke modification',
+    points: 5,
+  },
+  r6_5_7: {
+    refNumber: '6.5.7',
+    description: 'Compression ratio change',
+    points: 4,
+  },
+  r6_5_8: {
+    refNumber: '6.5.8',
+    description: 'Cylinder head porting; upsizing and/or modifying valves; or rotary engine porting',
+    points: 4,
+  },
+  r6_5_9: {
+    refNumber: '6.5.9',
+    description: 'Non OE engine pulley(s) ( size or weight)',
+    points: 2,
+  },
+  r6_5_10: {
+    refNumber: '6.5.10',
+    description: 'Flywheel / Clutch weight reduction',
+    points: 2,
+  },
+  r6_5_11: {
+    refNumber: '6.5.11',
+    description: 'Non OE electric water pump',
+    points: 1,
+  },
+  r6_5_12: {
+    refNumber: '6.5.12',
+    description: 'Relocation of engine/transmission 4" or more from original location',
+    points: 5,
+  },
+  r6_5_13: {
+    refNumber: '6.5.13',
+    description: 'Relocation of engine/transmission 1" to 4" from original location',
+    points: 2,
+  },
+}
+const forcedInductionRules = {
+  r6_6_1: {
+    refNumber: '6.6.1',
+    description: 'Intake ( prior to compressor )',
+    points: 2,
+  },
+  r6_6_2: {
+    refNumber: '6.6.2',
+    description: 'Intercooler & piping changes',
+    points: 3,
+  },
+  r6_6_3: {
+    refNumber: '6.6.3',
+    description: 'Exhaust (Cat back only)',
+    points: 2,
+  },
+  r6_6_4: {
+    refNumber: '6.6.4',
+    description: 'Exhaust (Header(s), Turbo back including cat)',
+    points: 5,
+  },
+  r6_6_5: {
+    refNumber: '6.6.5',
+    description: 'ECU reprogrammed, stand alone, chip, tune, etc',
+    points: 10,
+  },
+  r6_6_6: {
+    refNumber: '6.6.6',
+    description: 'Turbo or supercharger modifications or upgrades',
+    points: 3,
+  },
+  r6_6_7: {
+    refNumber: '6.6.7',
+    description: 'Water or methanol injection',
+    points: 2,
+  },
+  r6_6_8: {
+    refNumber: '6.6.8',
+    description: 'Fuel (E85, 100+ Octane Race Gas)',
+    points: 5,
+  },
+}
+const naRules = {
+  r6_7_1: {
+    refNumber: '6.7.1',
+    description: 'Intake manifold(s)',
+    points: 3,
+  },
+  r6_7_2: {
+    refNumber: '6.7.2',
+    description: 'Intake (from manifold to filter element)',
+    points: 1,
+  },
+  r6_7_3: {
+    refNumber: '6.7.3',
+    description: 'Exhaust - Any modification after the Cat (muffler(s) resonator(s), pipe(s))',
+    points: 1,
+  },
+  r6_7_4: {
+    refNumber: '6.7.4',
+    description: 'Exhaust - manifold, headers, catalytic convertor',
+    points: 2,
+  },
+  r6_7_5: {
+    refNumber: '6.7.5',
+    description: 'Camshafts, rocker arms',
+    points: 3,
+  },
+  r6_7_6: {
+    refNumber: '6.7.6',
+    description: 'ECU reprogrammed, stand alone, chip, tune, etc',
+    points: 2,
+  },
+  r6_7_7: {
+    refNumber: '6.7.7',
+    description: 'Head swapping for different design; machining or porting; valves up sizing or modifications',
+    points: 4,
+  },
+  r6_7_8: {
+    refNumber: '6.7.8',
+    description: 'Rotary engine porting',
+    points: 4
+  },
+  r6_7_9: {
+    refNumber: '6.7.9',
+    description: 'Fuel (E85, 100+ Octane Race Gas)',
+    points: 3,
+  },
+}
+const wheelTireRules = {
+  r6_8_1: {
+    refNumber: '6.8.1',
+    description: 'Wheels and or tires extend beyond fenders',
+    points: 5,
+  },
+  r6_8_2: {
+    refNumber: '6.8.2',
+    description: 'Wheel width increase - more than 1" over stock',
+    points: 5,
+  },
+  r6_8_3: {
+    refNumber: '6.8.3',
+    description: 'Wheel width increase - up to 1" beyond stock',
+    points: 2,
+  },
+  r6_8_4: {
+    refNumber: '6.8.4',
+    description: 'UTQG 50 and below (commonly known as tire treadwear rating)',
+    points: 45,
+  },
+  r6_8_5: {
+    refNumber: '6.8.5',
+    description: 'UTQG 51-220',
+    points: 5,
+  },
+  r6_8_6: {
+    refNumber: '6.8.6',
+    description: 'Non DOT Rated',
+    points: 15,
+  },
+}
 
 const allRules: Array<any> = []
 
 addRules(suspensionRules);
 addRules(bodyRules);
 addRules(aeroRules);
+addRules(drivetrainRules);
+addRules(forcedInductionRules);
+addRules(naRules);
+addRules(wheelTireRules);
 
 const pointsToAdd = computed(() => {
   const points = selectedRules.value.map((r) => {
@@ -189,8 +376,10 @@ function addRules(rulesContainer: any) {
       <h1>NASA Autocross Class Calculator</h1>
     </div>
 
-    <div>selected rules: {{ selectedRules }}</div>
-    <div>points: {{ pointsToAdd }}</div>
+    <div class="pointsOverlay">
+      <div>selected rules: {{ selectedRules }}</div>
+      <div>points: {{ pointsToAdd }}</div>
+    </div>
 
     <div class="container">
       <h2 class="header">Chassis and Suspension</h2>
@@ -226,6 +415,7 @@ function addRules(rulesContainer: any) {
       <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_14"></rule-input>
       <rule-input v-model="selectedRules" :rule="bodyRules.r6_3_15"></rule-input>
     </div>
+
     <div class="container">
       <h2 class="header">Aero (other than OEM add-ons)</h2>
       <div>
@@ -239,7 +429,65 @@ function addRules(rulesContainer: any) {
       <rule-input v-model="selectedRules" :rule="aeroRules.r6_4_1"></rule-input>
       <rule-input v-model="selectedRules" :rule="aeroRules.r6_4_2"></rule-input>
     </div>
+
+    <div class="container">
+      <h2 class="header">Drivetrain and Engine Modifications</h2>
+      <div>
+        Adding a Turbo or Supercharder requires you to apply for a new BASE CLASS.
+      </div>
+      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_2"></rule-input>
+      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_3"></rule-input>
+      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_4"></rule-input>
+      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_5"></rule-input>
+      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_6"></rule-input>
+      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_7"></rule-input>
+      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_8"></rule-input>
+      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_9"></rule-input>
+      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_10"></rule-input>
+      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_11"></rule-input>
+      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_12"></rule-input>
+      <rule-input v-model="selectedRules" :rule="drivetrainRules.r6_5_13"></rule-input>
+    </div>
+
+    <div class="container">
+      <h2 class="header">Supercharged and or Turbo Vehicles</h2>
+      <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_1"></rule-input>
+      <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_2"></rule-input>
+      <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_3"></rule-input>
+      <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_4"></rule-input>
+      <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_5"></rule-input>
+      <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_6"></rule-input>
+      <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_7"></rule-input>
+      <rule-input v-model="selectedRules" :rule="forcedInductionRules.r6_6_8"></rule-input>
+    </div>
+
+    <div class="container">
+      <h2 class="header">Naturally Aspirated Vehicles</h2>
+      <rule-input v-model="selectedRules" :rule="naRules.r6_7_1"></rule-input>
+      <rule-input v-model="selectedRules" :rule="naRules.r6_7_2"></rule-input>
+      <rule-input v-model="selectedRules" :rule="naRules.r6_7_3"></rule-input>
+      <rule-input v-model="selectedRules" :rule="naRules.r6_7_4"></rule-input>
+      <rule-input v-model="selectedRules" :rule="naRules.r6_7_5"></rule-input>
+      <rule-input v-model="selectedRules" :rule="naRules.r6_7_6"></rule-input>
+      <rule-input v-model="selectedRules" :rule="naRules.r6_7_7"></rule-input>
+      <rule-input v-model="selectedRules" :rule="naRules.r6_7_8"></rule-input>
+      <rule-input v-model="selectedRules" :rule="naRules.r6_7_9"></rule-input>
+    </div>
+
+    <div class="container">
+      <h2 class="header">Wheels and Tires</h2>
+      <div>Tire Warmers are prohibited.</div>
+      <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_1"></rule-input>
+      <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_2"></rule-input>
+      <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_3"></rule-input>
+      <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_4"></rule-input>
+      <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_5"></rule-input>
+      <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_6"></rule-input>
+    </div>
+
   </div>
+
+
 </template>
 
 <style>
