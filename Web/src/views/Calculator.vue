@@ -23,10 +23,28 @@ const totalPoints = computed(() => {
 
   return baseClassPoints + basePointsPoints + (pointsToAddPoints * indexPoints);
 });
+const newClass = computed(() => {
+  const total = Math.round(totalPoints.value);
+  const nextClass = classes.findIndex((c) => c.points > total);
+  return nextClass !== -1 ? classes[nextClass - 1].name : '???';
+});
+
+var classes = [
+  { name: 'G', points: 0 },
+  { name: 'F', points: 20 },
+  { name: 'E', points: 40 },
+  { name: 'D', points: 60 },
+  { name: 'C', points: 80 },
+  { name: 'B', points: 100 },
+  { name: 'A', points: 120 },
+  { name: 'R', points: 150 },
+  { name: 'X', points: 190 },
+  { name: '0', points: 250 },
+];
 
 
-const isNumeric = (val: string) : boolean => {
-   return !isNaN(Number(val));
+const isNumeric = (val: string): boolean => {
+  return !isNaN(Number(val));
 }
 
 const suspensionRules = {
@@ -394,12 +412,12 @@ function addRules(rulesContainer: any) {
     </div>
 
     <div class="pointsOverlay pointsOverlay--bottom">
-      <div>selected rules: {{ selectedRules }}</div>
       <div>Base Class: {{ baseClass }}</div>
       <div>Base Points: {{ basePoints }}</div>
       <div>index: {{ index }}</div>
       <div>points: {{ pointsToAdd }}</div>
-      <div>Total Points: {{ totalPoints }}</div>
+      <div>Total Points: {{ Math.round(totalPoints * 100) / 100 }}</div>
+      <div>New Class: {{ newClass }}</div>
     </div>
 
     <div class="CarInformation">
@@ -536,7 +554,14 @@ function addRules(rulesContainer: any) {
         <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_5"></rule-input>
         <rule-input v-model="selectedRules" :rule="wheelTireRules.r6_8_6"></rule-input>
       </div>
+
+      <div class="container">
+        <h2 class="header">Your Selected Rules</h2>
+        <div>selected rules: {{ selectedRules }}</div>
+      </div>
+
     </div>
+
 
   </div>
 
@@ -544,9 +569,8 @@ function addRules(rulesContainer: any) {
 </template>
 
 <style>
-
 .rulesSections {
-  padding-bottom: 50px;
+  padding-bottom: 200px;
 }
 
 .container {
