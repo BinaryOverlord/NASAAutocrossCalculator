@@ -411,6 +411,30 @@ function addRules(rulesContainer: any) {
       <h1>NASA Autocross Class Calculator</h1>
     </div>
 
+    <div class="directions">
+      <h2 class="header">How to use this calculator.</h2>
+      <ol>
+        <li> <a href="https://app.box.com/s/o1z18703qryzlm5yrpnl8wvv9kbazr7f" target="_blank">Find your car's base class</a>. Note: if you've done and engine or drivetrain swap you must
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScZIfMXdFIvbDxIsC-pTyxauwBUv-r-XTXDAT-EjAfWzkvvUA/viewform?c=0&w=1" target="_blank">Apply for a new base class</a>
+       </li>
+       <li> 
+              Write down the 3 important characteristics. The cars Base Class (a letter grade, ie "A" or "B")
+                  , the base pointes (denoted as '*'s, ie "*", or "**". Your car might not have a *), and the car's Tier (denoted with roman numerals, eg "I", "II", or "III")
+       </li>
+       <li>
+              Enter those characteristics into the dropdown below.  
+       </li>
+       <li>
+              Go through the list of modifications and check anything that applies
+       </li>
+       <li>
+              Once finished, your new class is listed at the bottom of the page!
+       </li>
+      </ol>
+
+      Happy Driving!
+    </div>
+
     <div class="pointsOverlay pointsOverlay--bottom">
       <div>Base Class: {{ baseClass }}</div>
       <div>Base Points: {{ basePoints }}</div>
